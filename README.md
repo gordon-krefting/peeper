@@ -1,6 +1,6 @@
-#Peeper
-A bunch of sensor that can send data to my Home Assistant instance
-##Notes
+# Peeper
+A bunch of sensors that can send data to my Home Assistant instance
+## Notes
 A bunch of stuff happening here:
 - Using wifimanager.h to autoprovision a Wi-Fi Connection.
   - On very first use, the app will start a Wi-Fi AP called "NodeMCU Setup"
