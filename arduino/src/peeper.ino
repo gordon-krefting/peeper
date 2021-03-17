@@ -16,6 +16,7 @@
  * and enter a password.
  * 
  * TODO: force resending the mqtt config when the app config changes
+ * TODO: re-learn C++!!! I'm not very happy with the layout of this app....
  */
 #define DHTPIN D2
 #define DHTTYPE DHT22
