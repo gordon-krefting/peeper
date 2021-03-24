@@ -1,0 +1,14 @@
+{
+    "name": "$device_nickname$ Temperature",
+    "device_class": "temperature",
+    "state_topic": "peeper/$device_id$/temperature/state",
+    "unique_id": "$device_id$.temperature",
+    "unit_of_measurement": "°F",
+    "device": {
+        "name": "$device_nickname$",
+        "model": "Peeper Sensor",
+        "sw_version": ".001",
+        "mf": "Gordon Krefting",
+        "identifiers": ["$device_id$"]
+    }
+}
