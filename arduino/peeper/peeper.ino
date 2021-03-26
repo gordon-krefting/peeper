@@ -19,7 +19,6 @@
  * TODO: re-learn C++!!! I'm not very happy with the layout of this app....
  * TODO: error handling (on the form especially...)
  * TODO: mDNS
- * TODO: keep connection alive (and resend config)
  */
 #define DHTPIN D2
 #define DHTTYPE DHT22
@@ -92,8 +91,19 @@ void loop() {
       sendSensorValues();
     }
   }
-  delay(1000);
+  delay(1000);  // not sure we need this...
 }
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  char message[length + 1];
+  memcpy(message, payload, length);
+  message[length] = '\0';
+  if (strcmp("online", message) == 0) {
+    Serial.println("Home Assistant has come online, we need to resend config");
+    configHasChanged = true; // need to change name of this...
+  }
+}
+
 
 boolean connectAndSendConfig() {
   String tTopic = "homeassistant/sensor/" + deviceId + "/temperature/config";
@@ -118,6 +128,8 @@ boolean connectAndSendConfig() {
     setStatus("ERROR: Failed to publish config to:" + mqtt_server + ", code: " + client.state());
     return false;
   }
+  client.subscribe("homeassistant/status");
+  client.setCallback(callback);
   setStatus("OK - connection made and config sent.");
   configHasChanged = false;
   return true;
